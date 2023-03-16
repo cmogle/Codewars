@@ -1,0 +1,119 @@
+import os
+import random
+import time
+
+# ANSI escape code for green color
+green = "\033[32m"
+
+# ANSI escape code to reset color
+reset = "\033[0m"
+
+def clear_console():
+    if os.name == "nt":  # For Windows
+        os.system("cls")
+    else:  # For macOS and Linux
+        os.system("clear")
+      
+def get_affirmation(rating):
+    affirmations = {
+    1: [
+        "You are strong and capable.",
+        "Every day is a new opportunity.",
+        "Challenges help us grow stronger.",
+    ],
+    2: [
+        "Believe in yourself and your abilities.",
+        "You have the power to overcome obstacles.",
+        "Your strength lies in your resilience.",
+    ],
+    3: [
+        "Keep pushing forward, one step at a time.",
+        "You can accomplish great things.",
+        "Remember to take care of yourself.",
+    ],
+    4: [
+        "Every small victory matters.",
+        "Positive thinking can lead to positive outcomes.",
+        "You are worthy and deserving of happiness.",
+    ],
+    5: [
+        "You are doing great!",
+        "Stay focused and keep up the good work.",
+        "You are on the right track.",
+    ],
+    6: [
+        "Celebrate your progress!",
+        "You are making a difference.",
+        "Stay confident and keep moving forward.",
+    ],
+    7: [
+        "Keep up the momentum!",
+        "You're doing an amazing job.",
+        "You have so much to be proud of.",
+    ],
+    8: [
+        "Your hard work is paying off!",
+        "You're an inspiration to others.",
+        "Keep striving for excellence.",
+    ],
+    9: [
+        "You are unstoppable!",
+        "Your achievements are remarkable.",
+        "Keep shining and setting the bar high.",
+    ],
+    10: [
+        "You're incredible!",
+        "Congratulations on your successes!",
+        "You are an amazing person!",
+    ],
+}
+
+    selected_affirmations = affirmations[rating]
+    return random.choice(selected_affirmations)
+
+while True:
+    clear_console()
+    print()
+    print("Wholesome Positivity Machine \n")
+    print("Who are you, friend?")
+    myName = input(f"{green}")
+    print(f"{reset}", end="")
+    print()
+    print("What do you want to achieve in life,",myName,"?")
+    myGoal = input(f"{green}")
+    print(f"{reset}", end="")
+    print()
+
+    while True:
+      try:
+          print("How are you feeling on a scale of 1-10? (1 😞, 10 😃),", myName, ": ", end="")
+          rating = int(input(f"{green}"))
+          print(f"{reset}", end="")
+          if 1 <= rating <= 10:
+              break
+          else:
+              print("Please enter a number between 1 and 10.")
+      except ValueError:
+          print(f"{reset}Please enter a valid integer.")
+
+    random_affirmation = get_affirmation(rating)
+    print("\n","Hey,", f"{myName},", random_affirmation,"\n")
+    time.sleep(1)
+
+    should_exit = False
+    while True:
+      print("Do you want to rerun the Affirmation Machine? (yes/no)")
+      user_choice = input(f"{green}").lower()
+      print(f"{reset}", end="")
+
+      if user_choice == "yes":
+        break
+      elif user_choice == "no":
+        should_exit = True
+        break
+      else:
+        print("Invalid input. Please enter 'yes' or 'no'.")
+
+    if should_exit:
+      break
+
